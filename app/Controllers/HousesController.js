@@ -32,10 +32,16 @@ export class HousesController {
     //  Get Car Form and inject into modal body
     let form = getHouseForm()
     document.getElementById('form-body').innerHTML = form
+    this.getHouses()
     _drawHouses()
   }
 
-  createHouse() {
+  async getHouses() {
+
+    await housesService.getHouses()
+  }
+
+  async createHouse() {
     window.event.preventDefault()
     let form = window.event.target
     // console.log('hello', form);
@@ -43,6 +49,8 @@ export class HousesController {
     let houseData = {
       bedrooms: form.bedrooms.value,
       bathrooms: form.bathrooms.value,
+      levels: form.levels.value,
+      year: form.year.value,
       imgUrl: form.imgUrl.value,
       description: form.description.value,
       price: form.price.value
@@ -52,6 +60,12 @@ export class HousesController {
     housesService.createHouse(houseData)
     form.reset()
     bootstrap.Modal.getOrCreateInstance(document.getElementById('form-modal')).hide()
+  }
+
+  async getHouse() {
+
+
+
   }
 
   deleteHouse(id) {

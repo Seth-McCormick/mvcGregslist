@@ -2,7 +2,7 @@ import { generateId } from "../Utils/generateId.js"
 
 export class Job {
     constructor(jobData) {
-        this.id = generateId()
+        this.id = jobData.id || generateId()
         this.company = jobData.company
         this.title = jobData.title
         this.wage = jobData.wage

@@ -2,10 +2,18 @@ import { ProxyState } from "../AppState.js";
 import { House } from "../Models/House.js";
 
 class HousesService {
-    createHouse(houseData) {
+
+    async getHouses() {
+        const res = await axios.get('https://bcw-sandbox.herokuapp.com/api/houses')
+        console.log('getting houses', res.data);
+        ProxyState.houses = res.data.map(h => new House(h))
+
+    }
+    async createHouse(houseData) {
         console.log('arrived at service un-damaged', houseData);
-        ProxyState.houses = [...ProxyState.houses, new House(houseData)]
-        console.log(ProxyState.houses);
+        const res = await axios.post('https://bcw-sandbox.herokuapp.com/api/houses', houseData)
+        ProxyState.houses = [...ProxyState.houses, new House(res.data)]
+        console.log('Create House', res.data);
     }
     deleteHouse(id) {
         ProxyState.houses = ProxyState.houses.filter(h => h.id != id)

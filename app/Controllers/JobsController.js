@@ -8,16 +8,8 @@ function _drawJobs() {
     let jobs = ProxyState.jobs
     let template = ''
     jobs.forEach(j => { template += j.Template })
-
-
     document.getElementById('listings').innerHTML = template
-
 }
-
-
-
-
-
 
 
 export class JobsControllers {
@@ -37,8 +29,6 @@ export class JobsControllers {
         let form = window.event.target
 
         let jobData = {
-
-
             company: form.company.value,
             title: form.title.value,
             wage: form.wage.value,
@@ -49,6 +39,12 @@ export class JobsControllers {
         jobsService.createJob(jobData)
         form.reset()
         bootstrap.Modal.getOrCreateInstance(document.getElementById('form-modal')).hide()
+    }
+
+    async getJob() {
+
+
+
     }
 
     deleteJob(id) {
